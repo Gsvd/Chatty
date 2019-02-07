@@ -6,7 +6,12 @@
       </div>
       <div class="box">
         <div class="messages">
-          <div class="message" v-for="(msg, index) in messages" v-bind:key="index">{{ msg.message }}</div>
+          <div class="message" v-for="(msg, index) in messages" v-bind:key="index">
+            {{ msg.message }}
+          </div>
+        </div>
+        <div class="status">
+          <div class="username">Connected as {{ user }}</div>
         </div>
         <div class="input">
           <div class="text">
@@ -16,6 +21,9 @@
             <i class="far fa-paper-plane"></i>
           </div>
         </div>
+      </div>
+      <div class="copyright">
+        version 0.1
       </div>
     </div>
   </div>
@@ -38,7 +46,7 @@ export default {
     user: '',
     messages: [],
     message: '',
-    socket: io('10.10.16.111:3000')
+    socket: io('127.0.0.1:3000')
   }),
   methods: {
     sendMessage() {
@@ -55,6 +63,9 @@ export default {
 </script>
 
 <style lang="scss">
+$break-small: 1024px;
+$break-large: 1200px;
+
 @font-face {
   font-family: "Roboto";
   src: url("assets/fonts/Roboto-Regular.ttf");
@@ -73,7 +84,7 @@ export default {
 }
 #app {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 100vh;
 
   .container {
@@ -90,13 +101,25 @@ export default {
       margin-bottom: 25px;
     }
 
+    .copyright {
+      font-family: "Roboto-Light";
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
     .box {
       display: flex;
       flex-direction: column;
       height: 60vh;
-      width: 580px;
       border: 1px rgb(235, 235, 235) solid;
       border-radius: 2px;
+
+      @media screen and (max-width: $break-small) {
+        width: 85%;
+      }
+      @media screen and (min-width: $break-large) {
+        width: 35%;
+      }
 
       .messages {
         word-wrap: break-word;
@@ -106,6 +129,19 @@ export default {
         overflow-y: auto;
 
         .message {
+          font-family: "Roboto";
+          font-size: 13px;
+          padding: 5px;
+          border-top: 1px rgb(235, 235, 235) solid;
+        }
+      }
+
+      .status {
+
+        background-color: rgb(235, 235, 235);
+
+        .username {
+          text-align: center;
           font-family: "Roboto";
           font-size: 13px;
           padding: 5px;
@@ -129,6 +165,7 @@ export default {
             width: 98%;
             height: 54px;
             border: none;
+            font-family: "Roboto";
           }
         }
 
