@@ -17,8 +17,13 @@ io.on('connection', (socket) => {
     message: `${ getTimeFormatted() } ${ firstName } joined.`
   })
   socket.on('SEND_MESSAGE', (data) => {
-    data.message = `${ getTimeFormatted() } ${ data.message }`
+    data.message = `${ getTimeFormatted() } ${ data.user }: ${ data.message }`
     io.emit('MESSAGE', data)
+  })
+  socket.on('disconnect', () => {
+    io.emit('MESSAGE', {
+      message: `${ getTimeFormatted() } ${ firstName } leaved.`
+    })
   })
 })
 

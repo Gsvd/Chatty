@@ -117,18 +117,19 @@ $break-large: 1200px;
       @media screen and (max-width: $break-small) {
         width: 85%;
       }
+
       @media screen and (min-width: $break-large) {
         width: 35%;
       }
 
       .messages {
-        word-wrap: break-word;
         display: flex;
         flex-direction: column-reverse;
         flex-grow: 1;
         overflow-y: auto;
 
         .message {
+          word-break: break-all;
           font-family: "Roboto";
           font-size: 13px;
           padding: 5px;
@@ -156,14 +157,15 @@ $break-large: 1200px;
         border-top: 1px rgb(235, 235, 235) solid;
 
         .text {
+          display: flex;
+          flex-direction: column;
           flex-grow: 9;
           text-align: center;
 
           textarea {
+            flex-grow: 1;
             resize: none;
             outline: none;
-            width: 98%;
-            height: 54px;
             border: none;
             font-family: "Roboto";
           }
